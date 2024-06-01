@@ -28,6 +28,8 @@ def get_input():
             print("----------------------------------------------------------")
             print(f"{Fore.GREEN}Available commands: {Style.RESET_ALL}")
             print(f"{Fore.GREEN}q: Quit{Style.RESET_ALL}")
+            print(f"{Fore.GREEN}gh: Open Github Repository{Style.RESET_ALL}")
+            print(f"{Fore.GREEN}clear: clear the screen{Style.RESET_ALL}")
             print(f"{Fore.GREEN}help: Show available commands{Style.RESET_ALL}")
             get_input()
         if number == "gh":
