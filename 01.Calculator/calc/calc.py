@@ -1,5 +1,4 @@
 # Imports
-import inquirer.themes
 import typer
 import inquirer
 from colorama import Fore, Style
