@@ -1,0 +1,6 @@
+colorama
+inquirer
+pyfiglet
+yaspin
+setuptools
+tabulate
