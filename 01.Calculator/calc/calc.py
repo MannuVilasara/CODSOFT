@@ -70,9 +70,7 @@ def main():
         os.system("cls" if os.name == "nt" else "clear")
 
         result = 0  # result
-        typer.echo(
-            f"{Fore.RED}Enter Integer to do calculations{Style.RESET_ALL}"
-        )
+        typer.echo(f"{Fore.RED}Enter Integer to do calculations{Style.RESET_ALL}")
         number1 = get_input()  # getting number 1
         typer.echo(f"➥ {Fore.CYAN}{number1}{Style.RESET_ALL}")
 
@@ -124,7 +122,7 @@ def main():
                     continue
 
             os.system("cls" if os.name == "nt" else "clear")
-            
+
             result = round(result, 2)
             typer.echo(f"❯ {Fore.GREEN}{result}{Style.RESET_ALL}")
             number1 = result  # update number1 to the result for the next operation

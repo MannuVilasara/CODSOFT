@@ -10,7 +10,7 @@ setup(
     version="2.0",
     packages=find_packages(),
     include_package_data=True,
-    install_requires=["colorama","pyperclip"],
+    install_requires=["colorama", "pyperclip"],
     entry_points="""
         [console_scripts]
         passgen=passgen.main:main
