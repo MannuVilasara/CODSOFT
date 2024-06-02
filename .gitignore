@@ -2,3 +2,5 @@
 __pycache__
 build
 calc.egg-info
+passgen.egg-info
+dist
