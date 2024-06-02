@@ -3,3 +3,4 @@ inquirer
 pyfiglet
 typer
 yaspin
+setuptools
