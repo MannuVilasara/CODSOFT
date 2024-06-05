@@ -7,7 +7,7 @@ from PySide6.QtWidgets import (
     QPushButton,
     QLabel,
     QHBoxLayout,
-    QGridLayout,
+    QMessageBox,
 )
 from PySide6.QtGui import QPalette, QColor, QFont
 from PySide6.QtCore import Qt
@@ -19,6 +19,7 @@ class RockPaperScissorsGame(QWidget):
         self.initUI()
         self.player_score = 0
         self.computer_score = 0
+        self.rounds_played = 0
 
     def initUI(self):
         self.setWindowTitle("Rock Paper Scissors Game")
@@ -43,24 +44,27 @@ class RockPaperScissorsGame(QWidget):
 
         self.layout = QVBoxLayout()
 
+        self.title_label = QLabel("Rock Paper Scissors Game", self)
+        self.title_label.setAlignment(Qt.AlignCenter)
+        self.title_label.setStyleSheet("font-size: 24px; font-weight: bold;")
+        self.layout.addWidget(self.title_label)
+
         self.score_label = QLabel("Player: 0 - Computer: 0", self)
         self.score_label.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(self.score_label)
-        self.score_label.setStyleSheet("font-size: 18px")
-        self.score_label.setStyleSheet("color: white")
-
+        self.score_label.setStyleSheet("font-size: 18px;")
         self.score_label.setFont(QFont("Arial", 20))
 
         self.moves_label = QLabel("", self)
         self.moves_label.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(self.moves_label)
-        self.moves_label.setStyleSheet("font-size: 18px")
+        self.moves_label.setStyleSheet("font-size: 18px;")
         self.moves_label.setFont(QFont("Arial", 20))
 
         self.result_label = QLabel("", self)
         self.result_label.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(self.result_label)
-        self.result_label.setStyleSheet("font-size: 18px")
+        self.result_label.setStyleSheet("font-size: 18px;")
         self.result_label.setFont(QFont("Arial", 20))
 
         self.image_layout = QHBoxLayout()
@@ -108,6 +112,10 @@ class RockPaperScissorsGame(QWidget):
             return "✌️"
 
     def play(self, player_choice):
+        if self.rounds_played >= 3:
+            self.show_end_game_dialog()
+            return
+
         computer_choice = random.choice(["Rock", "Paper", "Scissors"])
         self.moves_label.setText(
             f"You chose {player_choice} {self.give_emoji(player_choice)}, computer chose {computer_choice} {self.give_emoji(computer_choice)}"
@@ -147,6 +155,10 @@ class RockPaperScissorsGame(QWidget):
 
         self.result_label.setText(result)
         self.update_score()
+        self.rounds_played += 1
+
+        if self.rounds_played == 3:
+            self.show_end_game_dialog()
 
     def reset(self):
         self.result_label.setText("")
@@ -154,12 +166,35 @@ class RockPaperScissorsGame(QWidget):
         self.result_label.setStyleSheet("")
         self.player_score = 0
         self.computer_score = 0
+        self.rounds_played = 0
         self.update_score()
 
     def update_score(self):
         self.score_label.setText(
             f"Player: {self.player_score} - Computer: {self.computer_score}"
         )
+
+    def show_end_game_dialog(self):
+        winner = ""
+        if self.player_score > self.computer_score:
+            winner = "You win the game!"
+        elif self.computer_score > self.player_score:
+            winner = "Computer wins the game!"
+        else:
+            winner = "The game is a tie!"
+
+        msg_box = QMessageBox(self)
+        msg_box.setWindowTitle("Game Over")
+        msg_box.setText(f"{winner}\nDo you want to play again?")
+        msg_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        msg_box.buttonClicked.connect(self.handle_end_game_response)
+        msg_box.exec()
+
+    def handle_end_game_response(self, response):
+        if response.text() == "&Yes":
+            self.reset()
+        else:
+            self.close()
 
 
 if __name__ == "__main__":
