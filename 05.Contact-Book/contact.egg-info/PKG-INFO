@@ -1,9 +1,0 @@
-Metadata-Version: 2.1
-Name: contact
-Version: 1.0
-Summary: A simple cli-based contact book
-Author: MannuVilasra
-Author-email: mannuvilasara@gmail.com
-Requires-Dist: colorama
-Requires-Dist: inquirer
-Requires-Dist: tabulate
