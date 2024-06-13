@@ -73,7 +73,7 @@ def main():
         typer.echo(f"{Fore.RED}Enter Integer to do calculations{Style.RESET_ALL}")
         number1 = get_input()  # getting number 1
         typer.echo(f"➥ {Fore.CYAN}{number1}{Style.RESET_ALL}")
-
+        check = False
         while True:
             # prompt list for options
             questions = [
@@ -102,8 +102,12 @@ def main():
                     f"{Fore.CYAN}Exiting the calculator. Goodbye!{Style.RESET_ALL}"
                 )
                 break
-
-            number2 = get_input()  # Getting number 2
+            elif action == "Clear":
+                result = 0
+                check = True
+                
+            if check == False:
+                number2 = get_input()  # Getting number 2
             typer.echo(f"❯ {Fore.CYAN}{number2}{Style.RESET_ALL}")
 
             if action == "Add (+)":
@@ -121,8 +125,7 @@ def main():
                         f"{Fore.RED}{Style.BRIGHT}Error:{Style.RESET_ALL} Division by zero is not allowed."
                     )
                     continue
-            elif action == "Clear":
-                number1 = 0
+            
                 
 
             os.system("cls" if os.name == "nt" else "clear")
@@ -130,6 +133,7 @@ def main():
             result = round(result, 2)
             typer.echo(f"❯ {Fore.GREEN}{result}{Style.RESET_ALL}")
             number1 = result  # update number1 to the result for the next operation
+            check = False
 
     except KeyboardInterrupt:
         typer.echo(f"\n{Fore.RED}Cancelled by user.{Style.RESET_ALL}")
