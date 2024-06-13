@@ -85,6 +85,7 @@ def main():
                         "Subtract (-)",
                         "Multiply (*)",
                         "Divide (/)",
+                        "Clear",
                         "Exit (q)",
                     ],
                 )
@@ -120,6 +121,9 @@ def main():
                         f"{Fore.RED}{Style.BRIGHT}Error:{Style.RESET_ALL} Division by zero is not allowed."
                     )
                     continue
+            elif action == "Clear":
+                number1 = 0
+                
 
             os.system("cls" if os.name == "nt" else "clear")
 
